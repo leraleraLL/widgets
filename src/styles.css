@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+@import "primeicons/primeicons.css";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  font-family: 'Nunito', sans-serif;
+}
+
+.light-gray-tooltip .p-tooltip-text {
+  color: #333 !important;
+  background: #f5f7fa !important;
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* стрелка */
+.light-gray-tooltip.p-tooltip-top .p-tooltip-arrow {
+  border-top-color: #f5f7fa !important;
+}
+.light-gray-tooltip.p-tooltip-bottom .p-tooltip-arrow {
+  border-bottom-color: #f5f7fa !important;
+}
+

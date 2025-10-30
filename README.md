@@ -1,59 +1,47 @@
-# TestTask
+Проект построен на Angular 20 с использованием standalone-компонентов, Signals API, и библиотеки PrimeNG.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.7.
+📂 Dashboard — отвечает за отображение всех виджетов, их фильтрацию, drag & drop и сохранение состояния.
+📦 Widget — самостоятельный блок с ленивой загрузкой графиков через NgComponentOutlet.
+🧩 Chart-компоненты — переиспользуемые визуализации (Pie, Timeline, Progress).
 
-## Development server
+⚙️ Ключевые решения
 
-To start a local development server, run:
+Signals + Computed:
+Используются для реактивного обновления данных без лишних ререндеров и подписок RxJS.
+Это позволило упростить логику потоков и улучшить производительность.
 
-```bash
-ng serve
-```
+Ленивая загрузка графиков:
+Компоненты графиков подгружаются асинхронно через import() при первом рендере конкретного типа.
+Это снизило initial bundle size и ускорило загрузку дашборда.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+NgComponentOutlet:
+Применён для динамического внедрения разных типов виджетов (progress, pie, timeline) без switch-case логики.
+Передача данных осуществляется через inputs: { data: dataForChild() }.
 
-## Code scaffolding
+Drag & Drop (CDK):
+Используется для сортировки и изменения порядка карточек виджетов с сохранением в localStorage.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Сохранение состояния:
+Все настройки (порядок, тип, данные) сохраняются в localStorage через DashboardStateService,
+а при старте восстанавливаются автоматически.
 
-```bash
-ng generate component component-name
-```
+Оптимизация обновлений:
+Один из виджетов (реал-тайм) обновляется каждые 5 секунд через effect() без дублирующих рендеров.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+🤖 Использование AI
 
-```bash
-ng generate --help
-```
+AI-инструменты (ChatGPT) применялись не для генерации готового кода,
+а для ускорения принятия архитектурных и инженерных решений.
 
-## Building
+Конкретные примеры:
 
-To build the project run:
+💡 Оптимизация подхода к ленивой загрузке графиков (NgComponentOutlet + Signals вместо ViewContainerRef).
 
-```bash
-ng build
-```
+🔄 Подсказки по правильному использованию effect() в конструкторах для отслеживания сигналов.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+🧮 Выработка стратегии вычисления зависимых сигналов (computed) для минимизации перерендеров.
 
-## Running unit tests
+🎨 Помощь в улучшении UX (расположение фильтра, тултипы, стиль кнопок PrimeNG).
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+🧱 Рефакторинг сервисов с signal() и авто-сохранением в localStorage.
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

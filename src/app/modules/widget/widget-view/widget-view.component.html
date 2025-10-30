@@ -1,0 +1,140 @@
+<p-dialog
+  header="{{ editWidgetId() ? 'Редактировать виджет' : 'Создать виджет' }}"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '500px' }"
+  [dismissableMask]="true"
+  (onHide)="closeModal()"
+>
+  <form [formGroup]="form" class="form">
+
+    <!-- Тип виджета -->
+    <div class="field" [class.invalid]="form.get('type')?.invalid && form.get('type')?.touched">
+      <label for="type">Тип виджета</label>
+
+      <div class="field-control">
+        <p-autoComplete
+          inputId="type"
+          formControlName="type"
+          [suggestions]="filteredTypes()"
+          (completeMethod)="filterTypes($event)"
+          placeholder="Выберите тип"
+          [forceSelection]="true"
+          [dropdown]="true"
+        ></p-autoComplete>
+
+        @if (form.get('type')?.invalid && form.get('type')?.touched) {
+          <span class="error-text">Укажите тип виджета</span>
+        }
+      </div>
+    </div>
+
+    <!-- Название виджета -->
+    <div class="field" [class.invalid]="form.get('name')?.invalid && form.get('name')?.touched">
+      <label for="name">Название виджета</label>
+
+      <div class="field-control">
+        <input
+          pInputText
+          id="name"
+          type="text"
+          placeholder="Введите название"
+          formControlName="name"
+        />
+
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <span class="error-text">Введите название</span>
+        }
+      </div>
+    </div>
+
+    <!-- Название проекта -->
+    <div class="field" [class.invalid]="form.get('projectName')?.invalid && form.get('projectName')?.touched">
+      <label for="projectName">Название проекта</label>
+
+      <div class="field-control">
+        <input
+          pInputText
+          id="projectName"
+          type="text"
+          placeholder="Введите проект"
+          formControlName="projectName"
+        />
+
+        @if (form.get('projectName')?.invalid && form.get('projectName')?.touched) {
+          <span class="error-text">Введите название проекта</span>
+        }
+      </div>
+    </div>
+
+    <!-- Прогресс -->
+    <div class="field-group progress-section">
+      <div class="group-header">Прогресс выполнения задач:</div>
+
+      <div class="group-body">
+        <div class="field small">
+          <label for="tasksCompleted">Выполнено задач</label>
+
+          <div class="field-control">
+            <p-inputNumber
+              inputId="tasksCompleted"
+              formControlName="tasksCompleted"
+              mode="decimal"
+              [min]="0"
+              placeholder="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+
+        <div class="field small">
+          <label for="tasksTotal">Всего задач</label>
+
+          <div class="field-control">
+            <p-inputNumber
+              inputId="tasksTotal"
+              formControlName="tasksTotal"
+              mode="decimal"
+              [min]="1"
+              placeholder="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Даты -->
+    <div class="field">
+      <label for="dateRange">Период</label>
+
+      <div class="field-control">
+        <p-datepicker
+          inputId="dateRange"
+          formControlName="dateRange"
+          [selectionMode]="'range'"
+          [showIcon]="true"
+          dateFormat="yy-mm-dd"
+          placeholder="Выберите период"
+          [inputStyle]="{ width: '100%' }"
+        ></p-datepicker>
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="actions">
+      <button
+        pButton
+        type="button"
+        label="Отмена"
+        class="p-button-secondary"
+        (click)="closeModal()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        [label]="actionLabel()"
+        (click)="save()"
+        class="p-button-primary"
+      ></button>
+    </div>
+  </form>
+</p-dialog>

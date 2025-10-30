@@ -1,0 +1,22 @@
+<p-card class="progress">
+  @if (hasData()) {
+    <div class="header">
+      <span class="label">{{ 'Прогресс выполнения ' + data()?.tasksCompleted + '/' + data()?.tasksTotal }}</span>
+    </div>
+
+    <p-progressBar
+      [value]="percent()"
+      [showValue]="false"
+      styleClass="custom-progress"
+    ></p-progressBar>
+
+    <div class="footer">
+      <span class="percent">{{ percent() }}%</span>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <i class="pi pi-info-circle"></i>
+      <span>Нет данных для отображения</span>
+    </div>
+  }
+</p-card>

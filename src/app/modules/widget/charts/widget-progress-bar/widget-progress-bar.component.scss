@@ -1,0 +1,66 @@
+.progress {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 4px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+
+    .percent {
+      font-size: 24px;
+      font-weight: 500;
+      color: #007ad9;
+    }
+  }
+
+  ::ng-deep .custom-progress {
+    height: 15px;
+    width: 100%;
+    border-radius: 8px;
+    background: #f0f0f0;
+
+    .p-progressbar-value {
+      background: linear-gradient(90deg, #007ad9 0%, #00bcd4 100%);
+      border-radius: 8px;
+      transition: width 0.4s ease;
+    }
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 0;
+    color: #94a3b8;
+    text-align: center;
+
+    i {
+      font-size: 28px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    span {
+      font-size: 14px;
+      color: #64748b;
+    }
+  }
+
+}

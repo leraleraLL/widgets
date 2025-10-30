@@ -1,0 +1,33 @@
+@let widget = widgetData();
+
+<div class="widget-card">
+  <div class="header">
+    <span class="title">{{ widget?.name || '' }}</span>
+    <span class="subtitle">{{ widget?.projectName || '' }}</span>
+  </div>
+
+  <span class="iconEdit" (click)="editWidgetView()"></span>
+  <span class="iconClose" (click)="removeWidget()"></span>
+
+  <div class="chart">
+<!--    @if (widget.type === 'progress') {-->
+<!--      <widget-progress-bar [data]="widget.chartData"></widget-progress-bar>-->
+<!--    } @else if (widget.type === 'statistics') {-->
+<!--      <widget-pie [data]="widget.chartData"></widget-pie>-->
+<!--    } @else if (widget.type === 'timeline') {-->
+<!--      <widget-timeline [data]="widget.chartData"></widget-timeline>-->
+<!--    }-->
+    @if (loading()) {
+      <div class="skeleton"></div>
+    } @else if (error()) {
+      <div class="error">{{ error() }}</div>
+    } @else {
+      <ng-container
+        *ngComponentOutlet="component(); inputs: { data: dataForChild() }">
+      </ng-container>
+    }
+  </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+

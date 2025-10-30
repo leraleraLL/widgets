@@ -1,0 +1,202 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 80px;
+  height: 100%;
+  overflow: visible;
+  background-color: #f9f9f9;
+}
+
+.dashboard {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    display: inline-block;
+    font-size: 46px;
+    font-weight: 800;
+    color: #333;
+    line-height: 0.5;
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+  }
+
+  &__iconAdd {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    cursor: pointer;
+    background-image: url('/assets/images/PlusSquare.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &__line {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 24px 0;
+    align-self: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    align-items: start;
+    justify-items: stretch;
+    padding: 24px;
+    box-sizing: border-box;
+  }
+
+  &__widget-box {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+
+
+    &:active {
+      cursor: grabbing;
+      transform: scale(0.99);
+    }
+  }
+
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+
+  .cdk-drop-list-dragging &__widget-box {
+    transition: transform 0.15s ease;
+  }
+
+  input {
+    width: 240px;
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    text-align: center;
+    color: #777;
+    gap: 16px;
+
+    i {
+      font-size: 48px;
+      color: #d1d5db;
+    }
+
+    span {
+      font-size: 18px;
+      margin: 0;
+      color: #555;
+    }
+  }
+}
+
+/* ====== кнопка-стрелка dropdown ====== */
+:host ::ng-deep .p-autocomplete-dropdown {
+  background-color: #007bff !important;
+  border: 1px solid #007bff !important;
+  border-radius: 0 8px 8px 0 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: #0066d3 !important;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.25);
+  }
+
+  &:active {
+    background-color: #005bb8 !important;
+  }
+}
+/* ====== выпадающий список ====== */
+:host ::ng-deep .p-autocomplete-panel {
+  border: 1px solid #d0d7de !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: #ffffff !important;
+  padding: 4px 0;
+  animation: dropdownFadeIn 0.15s ease;
+}
+
+/* элементы списка */
+:host ::ng-deep .p-autocomplete-items .p-autocomplete-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+:host ::ng-deep .p-autocomplete-items .p-autocomplete-item:hover {
+  background-color: #f0f6ff;
+}
+/* выбранный элемент */
+:host ::ng-deep .p-autocomplete-items .p-highlight {
+  background-color: #007bff !important;
+  color: #ffffff !important;
+}
+
+/* анимация появления */
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:host ::ng-deep .p-inputgroup {
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  input.p-inputtext {
+    border-radius: 0px;
+  }
+
+  p-inputgroupaddon {
+    border: none !important;
+  }
+
+  .p-inputgroupaddon:last-child {
+    cursor: pointer;
+  }
+}
+

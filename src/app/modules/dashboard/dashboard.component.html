@@ -1,0 +1,68 @@
+<div class="dashboard">
+
+  <div class="dashboard__header">
+    <span class="dashboard__title">Dashboard</span>
+
+    <div class="dashboard__filters">
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-search"></i>
+        </p-inputGroupAddon>
+
+        <input
+          pInputText
+          type="text"
+          placeholder="Поиск по названию..."
+          [value]="filterText()"
+          (input)="onSearch($any($event.target).value)"
+        />
+
+        @if (filterText()) {
+          <p-inputGroupAddon class="dashboard__clear-btn" (click)="onSearch('')">
+            <i class="pi pi-times"></i>
+          </p-inputGroupAddon>
+        }
+      </p-inputGroup>
+      <span pTooltip="Добавить новый виджет"
+            tooltipPosition="bottom"
+            appendTo="body"
+            [tooltipStyleClass]="'light-gray-tooltip'"
+            tooltipShowDelay="200"
+            tooltipHideDelay="150"
+            class="dashboard__iconAdd"
+            (click)="onWidgetView()"></span>
+    </div>
+  </div>
+
+  <hr class="dashboard__line" />
+
+  @if (!visibleWidgets().length) {
+    <div class="dashboard__empty">
+      <i class="pi pi-inbox"></i>
+      <span>Нет виджетов для отображения</span>
+    </div>
+  } @else {
+    <div
+      cdkDropList
+      class="dashboard__grid"
+      cdkDropListOrientation="mixed"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (widget of visibleWidgets(); track widget.id) {
+        <div class="dashboard__widget-box" cdkDrag>
+          <widget-card [widgetData]="widget"
+                       [activeId]="randomWidgetId()"
+                       (edit)="onEditWidget($event)"
+                       (remove)="onRemoveWidget($event)"
+                       cdkDragHandle></widget-card>
+        </div>
+      }
+    </div>
+  }
+
+
+</div>
+
+@if (showModal()) {
+  <widget-view [editWidgetId]="editWidgetId()" (close)="onCloseModal()"></widget-view>
+}
