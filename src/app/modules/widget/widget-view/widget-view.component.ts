@@ -44,6 +44,8 @@ export class WidgetViewComponent {
 
   readonly editWidgetId = input<number | null>();
 
+  readonly widgetTypes = ['progress', 'statistics', 'timeline'];
+
   readonly visible = signal(true);
   readonly filteredTypes = signal<string[]>(this.widgetTypes);
   readonly actionLabel = computed(() =>
@@ -51,8 +53,6 @@ export class WidgetViewComponent {
   );
 
   readonly close = output<void>();
-
-  readonly widgetTypes = ['progress', 'statistics', 'timeline'];
 
   readonly form: FormGroup = this.fb.group({
     id: [null],

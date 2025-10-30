@@ -9,7 +9,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import type { ApexOptions } from 'ng-apexcharts';
 import { IChartData } from '../../models/widget';
 
-/** тип с обязательными полями, чтобы исключить undefined в шаблоне *
+/** тип с обязательными полями, чтобы исключить undefined в шаблоне */
 type TimelineOptionsType = Required<
   Pick<
     ApexOptions,
